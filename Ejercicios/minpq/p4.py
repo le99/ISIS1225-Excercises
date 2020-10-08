@@ -1,9 +1,10 @@
 import config
 
 from DISClib.ADT import minpq as pq
+# from DISClib.Algorithms.Sorting import heapsort
 
 """
-Encontrar las 5 noticias mas recientes
+Ordenar con HeapSort unas noticias por fecha
 """
 
 def greater(key1, key2):
@@ -13,11 +14,3 @@ def greater(key1, key2):
         return -1
     else:
         return 1
-
-
-minpq = pq.newMinPQ(greater)
-
-
-
-
-
