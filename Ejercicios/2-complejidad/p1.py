@@ -17,11 +17,11 @@ def busquedaSecuencialNativo(lista, elemento):
   return pos
 
 
-N = 10000
+N = 80*1000
 lista = [x for x in range(N)]
 
 t1 = time.process_time()
 busquedaSecuencialNativo(lista, N/2)
 t2 = time.process_time()
 
-print(t2-t1)  
+print(t2-t1)
