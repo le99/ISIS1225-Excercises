@@ -7,5 +7,5 @@ a = [None] * 5
 # 2) Asignacion
 a[2] = 5
 
-# 3) Lectua
+# 3) Lectura
 valor = a[2]
