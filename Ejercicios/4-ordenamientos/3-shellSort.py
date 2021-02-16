@@ -10,6 +10,7 @@ def insertionSort(lista, lessfunction):
     # por ejemplo para n = 100, h toma un valor inicial de 40
   
   while (h >= 1):
+    print('h', h)
     for i in range (h+1, n+1): # posiciones validas para comparar con elementos a h-distancia
       j = i
       while (j>=(h+1)) and lessfunction (lista[j],lista[j-h]):
@@ -23,7 +24,7 @@ def insertionSort(lista, lessfunction):
 def lessfunction(a, b):
   return a < b
 
-lista = [None,3,1,2]
+lista = [None,6,4,5,1,2,3]
 print(lista)
 
 insertionSort(lista, lessfunction)

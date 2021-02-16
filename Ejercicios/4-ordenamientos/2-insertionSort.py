@@ -17,7 +17,7 @@ def insertionSort(lista, lessfunction):
 def lessfunction(a, b):
   return a < b
 
-lista = [None,3,1,2]
+lista = [None,6,4,5,1,2,3]
 print(lista)
 
 insertionSort(lista, lessfunction)

@@ -11,7 +11,7 @@ def selectionSort (lista, lessfunction):
     # minimun tiene el menor elemento conocido hasta ese momento
     pos2 = pos1 + 1
     while pos2 <= size:
-      if lessfunction (lista[pos2],lista[pos1]):
+      if lessfunction (lista[pos2],lista[minimum]):
         minimum = pos2 # actualizacion del elemento más pequeño
       
       pos2 += 1
@@ -26,7 +26,7 @@ def selectionSort (lista, lessfunction):
 def lessfunction(a, b):
   return a < b
 
-lista = [None,3,1,2]
+lista = [None,6,4,5,1,2,3]
 print(lista)
 
 selectionSort(lista, lessfunction)
