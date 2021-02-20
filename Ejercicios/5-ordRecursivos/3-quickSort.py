@@ -54,3 +54,7 @@ print(lista)
 
 quickSort(lista, lessfunction)
 print(lista)
+
+
+# Based on:
+https://github.com/kevin-wayne/algs4/blob/master/src/main/java/edu/princeton/cs/algs4/Quick.java
