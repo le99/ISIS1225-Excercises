@@ -3,7 +3,7 @@ def insertionSort(lista, lessfunction):
   """
   Insertion sort para una lista genérica aplicando la comparación lessfunction  """
   size = len(lista) -1
-  pos1 = 1
+  pos1 = 2
   while pos1 <= size:
     pos2 = pos1
     while (pos2 >1) and lessfunction(lista[pos2],lista[pos2-1]):
