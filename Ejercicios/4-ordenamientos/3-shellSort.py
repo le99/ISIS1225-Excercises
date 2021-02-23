@@ -1,5 +1,5 @@
 
-def insertionSort(lista, lessfunction):
+def shellSort(lista, lessfunction):
   """
   shellS sort para una lista generica aplicando la comparación lessfunction
   """
@@ -27,7 +27,7 @@ def lessfunction(a, b):
 lista = [None,6,4,5,1,2,3]
 print(lista)
 
-insertionSort(lista, lessfunction)
+shellSort(lista, lessfunction)
 print(lista)
 
 
