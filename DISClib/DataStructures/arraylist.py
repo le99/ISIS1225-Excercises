@@ -27,6 +27,7 @@
 
 import config
 from DISClib.Utils import error as error
+import csv
 assert config
 
 """
@@ -40,7 +41,7 @@ assert config
 """
 
 
-def newList(cmpfunction=None):
+def newList(cmpfunction, key, filename, delim):
     """Crea una lista vacia.
 
     Args:
@@ -51,12 +52,24 @@ def newList(cmpfunction=None):
     Raises:
 
     """
-    new_list = {'elements': [],
-                'size': 0,
-                'type': 'ARRAY_LIST',
-                'cmpfunction': cmpfunction
-                }
-    return (new_list)
+    newlist = {'elements': [],
+               'size': 0,
+               'type': 'ARRAY_LIST',
+               'cmpfunction': cmpfunction,
+               'key': key
+               }
+
+    if(cmpfunction is None):
+        newlist['cmpfunction'] = defaultfunction
+    else:
+        newlist['cmpfunction'] = cmpfunction
+
+    if (filename is not None):
+        input_file = csv.DictReader(open(filename, encoding="utf-8"),
+                                    delimiter=delim)
+        for line in input_file:
+            addLast(newlist, line)
+    return (newlist)
 
 
 def addFirst(lst, element):
@@ -273,7 +286,7 @@ def insertElement(lst, element, pos):
         error.reraise(exp, 'arraylist->insertElement: ')
 
 
-def isPresent(lst, element):
+def isPresent(lst, e):
     """ Informa si el elemento element esta presente en la lista.
 
     Informa si un elemento está en la lista.
@@ -295,7 +308,7 @@ def isPresent(lst, element):
             keyexist = False
             for keypos in range(1, size+1):
                 info = lst['elements'][keypos-1]
-                if (lst['cmpfunction'](element, info) == 0):
+                if (compareElements(lst, e, info) == 0):
                     keyexist = True
                     break
             if keyexist:
@@ -364,6 +377,7 @@ def subList(lst, pos, numelem):
         sublst = {'elements': [],
                   'size': 0,
                   'type': 'ARRAY_LIST',
+                  'key': lst['key'],
                   'cmpfunction': lst['cmpfunction']}
         elem = pos-1
         cont = 1
@@ -375,3 +389,48 @@ def subList(lst, pos, numelem):
         return sublst
     except Exception as exp:
         error.reraise(exp, 'arraylist->subList: ')
+
+
+def iterator(lst):
+    """ Retorna un iterador para la lista.
+    Args:
+        lst: La lista a iterar
+
+    Raises:
+        Exception
+    """
+    try:
+        if(lst is not None):
+            for pos in range(0, lst['size']):
+                yield lst['elements'][pos]
+    except Exception as exp:
+        error.reraise(exp, 'arraylist->Iterator')
+
+
+def compareElements(lst, element, info):
+    """ Compara dos elementos
+
+    Se utiliza la función de comparación por defecto si key es None
+    o la función provista por el usuario en caso contrario
+    Args:
+        lst: La lista con los elementos
+        element:  El elemento que se esta buscando en la lista
+        info: El elemento de la lista que se está analizando
+
+    Returns:  0 si los elementos son iguales
+
+    Raises:
+        Exception
+    """
+    if(lst['key'] is not None):
+        return lst['cmpfunction'](element[lst['key']], info[lst['key']])
+    else:
+        return lst['cmpfunction'](element, info)
+
+
+def defaultfunction(id1, id2):
+    if id1 > id2:
+        return 1
+    elif id1 < id2:
+        return -1
+    return 0
