@@ -1,6 +1,9 @@
 import config
 from DISClib.ADT import graph as gr
+from DISClib.Algorithms.Graphs import dfs
 from DISClib.ADT import list as lt
+
+#Ejemplo uso de DFS
 
 def comparefunction(searchname, element):
     if (searchname == element['key']):
@@ -14,15 +17,16 @@ grafo = gr.newGraph(datastructure='ADJ_LIST',
                         size=14000,
                         comparefunction=comparefunction)
 
-# Hacer un metodo que imprima un grafo no dirigido de esta forma:
-# Vertice 1: Vertice-adyacente 1, Vertice-adyacente 2 
-# Vertice 2: Vertice-adyacente 1, Vertice-adyacente 2 
-# Vertice 3: Vertice-adyacente 1, Vertice-adyacente 2 
+#DFS
+gr.insertVertex(grafo, "a")
+gr.insertVertex(grafo, "b")
+gr.insertVertex(grafo, "c")
+gr.addEdge(grafo, "a", "b")
+gr.addEdge(grafo, "c", "b")
 
-gr.insertVertex(grafo, "1")
-gr.insertVertex(grafo, "2")
-gr.insertVertex(grafo, "3")
-gr.addEdge(grafo, "1", "2")
+search = dfs.DepthFirstSearch(grafo, "b")
+path = dfs.pathTo(search, "a")
+for v in lt.iterator(path):
+  print(v)
 
-def toString(grafo):
-    pass
+
